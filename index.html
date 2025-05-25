@@ -2,111 +2,119 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-    <title>でんしゃクイズ！</title>
-      <style>
-          body {
-                font-family: 'sans-serif';
-                      text-align: center;
-                            background: #cceeff;
-                                }
+  <title>でんしゃクイズ！</title>
+  <style>
+    body {
+      font-family: 'sans-serif';
+      text-align: center;
+      background: #cceeff;
+    }
 
-                                    .container {
-                                          background-color: #fff;
-                                                padding: 20px;
-                                                      margin: 50px auto;
-                                                            border-radius: 15px;
-                                                                  width: 90%;
-                                                                        max-width: 400px;
-                                                                              box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-                                                                                  }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      margin: 50px auto;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
-                                                                                      #train {
-                                                                                            width: 100px;
-                                                                                                  margin-bottom: 10px;
-                                                                                                      }
+    #train {
+      width: 200px;
+      margin-bottom: 10px;
+    }
 
-                                                                                                          #question {
-                                                                                                                font-size: 28px;
-                                                                                                                      margin: 20px 0;
-                                                                                                                          }
+    #question {
+      font-size: 28px;
+      margin: 20px 0;
+    }
 
-                                                                                                                              input {
-                                                                                                                                    font-size: 24px;
-                                                                                                                                          padding: 5px;
-                                                                                                                                                width: 100px;
-                                                                                                                                                      text-align: center;
-                                                                                                                                                          }
+    input {
+      font-size: 24px;
+      padding: 5px;
+      width: 100px;
+      text-align: center;
+    }
 
-                                                                                                                                                              button {
-                                                                                                                                                                    font-size: 20px;
-                                                                                                                                                                          padding: 10px 20px;
-                                                                                                                                                                                margin-top: 10px;
-                                                                                                                                                                                    }
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
 
-                                                                                                                                                                                        #result {
-                                                                                                                                                                                              font-size: 20px;
-                                                                                                                                                                                                    margin: 15px 0;
-                                                                                                                                                                                                        }
+    #result {
+      font-size: 20px;
+      margin: 15px 0;
+    }
 
-                                                                                                                                                                                                            #medals {
-                                                                                                                                                                                                                  margin-top: 20px;
-                                                                                                                                                                                                                      }
+    #medals {
+      margin-top: 20px;
+    }
 
-                                                                                                                                                                                                                          .medal {
-                                                                                                                                                                                                                                width: 40px;
-                                                                                                                                                                                                                                      margin: 2px;
-                                                                                                                                                                                                                                          }
-                                                                                                                                                                                                                                            </style>
-                                                                                                                                                                                                                                            </head>
-                                                                                                                                                                                                                                            <body>
-                                                                                                                                                                                                                                              <div class="container">
-                                                                                                                                                                                                                                                  <img id="train" src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Shinkansen_E5_series_front_view.jpg" alt="でんしゃ">
-                                                                                                                                                                                                                                                      <h1>でんしゃクイズ！</h1>
-                                                                                                                                                                                                                                                          <p id="question">？ + ？ =</p>
-                                                                                                                                                                                                                                                              <input type="number" id="answer" />
-                                                                                                                                                                                                                                                                  <br>
-                                                                                                                                                                                                                                                                      <button onclick="checkAnswer()">こたえる！</button>
-                                                                                                                                                                                                                                                                          <p id="result"></p>
-                                                                                                                                                                                                                                                                              <div id="medals"></div>
-                                                                                                                                                                                                                                                                                </div>
+    .medal {
+      width: 40px;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img id="train" src="" alt="でんしゃ" />
+    <h1>でんしゃクイズ！</h1>
+    <p id="question">？ + ？ =</p>
+    <input type="number" id="answer" />
+    <br>
+    <button onclick="checkAnswer()">こたえる！</button>
+    <p id="result"></p>
+    <div id="medals"></div>
+  </div>
 
-                                                                                                                                                                                                                                                                                  <script>
-                                                                                                                                                                                                                                                                                      let a, b;
-                                                                                                                                                                                                                                                                                          let medalCount = 0;
+  <script>
+    let a, b;
+    let medalCount = 0;
 
-                                                                                                                                                                                                                                                                                              function generateQuestion() {
-                                                                                                                                                                                                                                                                                                    a = Math.floor(Math.random() * 10);
-                                                                                                                                                                                                                                                                                                          b = Math.floor(Math.random() * 10);
-                                                                                                                                                                                                                                                                                                                document.getElementById("question").textContent = `${a} + ${b} =`;
-                                                                                                                                                                                                                                                                                                                      document.getElementById("result").textContent = "";
-                                                                                                                                                                                                                                                                                                                            document.getElementById("answer").value = "";
-                                                                                                                                                                                                                                                                                                                                }
+    function generateQuestion() {
+      a = Math.floor(Math.random() * 10);
+      b = Math.floor(Math.random() * 10);
+      document.getElementById("question").textContent = `${a} + ${b} =`;
+      document.getElementById("result").textContent = "";
+      document.getElementById("answer").value = "";
+    }
 
-                                                                                                                                                                                                                                                                                                                                    function checkAnswer() {
-                                                                                                                                                                                                                                                                                                                                          const input = parseInt(document.getElementById("answer").value);
-                                                                                                                                                                                                                                                                                                                                                const result = document.getElementById("result");
+    function checkAnswer() {
+      const input = parseInt(document.getElementById("answer").value);
+      const result = document.getElementById("result");
 
-                                                                                                                                                                                                                                                                                                                                                      if (input === a + b) {
-                                                                                                                                                                                                                                                                                                                                                              result.textContent = "せいかい！メダルをゲット！";
-                                                                                                                                                                                                                                                                                                                                                                      medalCount++;
-                                                                                                                                                                                                                                                                                                                                                                              addMedal();
-                                                                                                                                                                                                                                                                                                                                                                                    } else {
-                                                                                                                                                                                                                                                                                                                                                                                            result.textContent = `ざんねん！こたえは ${a + b} だよ`;
-                                                                                                                                                                                                                                                                                                                                                                                                  }
+      if (input === a + b) {
+        result.textContent = "せいかい！メダルをゲット！";
+        medalCount++;
+        addMedal();
+      } else {
+        result.textContent = `ざんねん！こたえは ${a + b} だよ`;
+      }
 
-                                                                                                                                                                                                                                                                                                                                                                                                        setTimeout(generateQuestion, 2000);
-                                                                                                                                                                                                                                                                                                                                                                                                            }
+      setTimeout(generateQuestion, 2000);
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                function addMedal() {
-                                                                                                                                                                                                                                                                                                                                                                                                                      const medals = document.getElementById("medals");
-                                                                                                                                                                                                                                                                                                                                                                                                                            const img = document.createElement("img");
-                                                                                                                                                                                                                                                                                                                                                                                                                                  img.src = "https://cdn-icons-png.flaticon.com/512/2583/2583434.png";
-                                                                                                                                                                                                                                                                                                                                                                                                                                        img.alt = "メダル";
-                                                                                                                                                                                                                                                                                                                                                                                                                                              img.className = "medal";
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    medals.appendChild(img);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+    function addMedal() {
+      const medals = document.getElementById("medals");
+      const img = document.createElement("img");
+      img.src = "https://cdn-icons-png.flaticon.com/512/2583/2583434.png";
+      img.alt = "メダル";
+      img.className = "medal";
+      medals.appendChild(img);
+    }
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            generateQuestion();
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              </script>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              </body>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                              </html>
+    const trainImages = [
+      "hayabusa.png"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * trainImages.length);
+    const randomImage = trainImages[randomIndex];
+    document.getElementById("train").src = randomImage;
+
+    generateQuestion();
+  </script>
+</body>
+</html>
