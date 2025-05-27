@@ -60,7 +60,7 @@
 </head>
 <body>
   <div class="container">
-    <img id="train" src="" alt="でんしゃ" />
+    <img id="train" src="images/hayabusa.jpg" alt="でんしゃ" />
     <h1>でんしゃクイズ！</h1>
     <p id="question">？ + ？ =</p>
     <input type="number" id="answer" />
@@ -71,12 +71,17 @@
   </div>
 
   <script>
-    let a, b;
+    let a;
+    let b = 1;
     let medalCount = 0;
 
+    const trainImages = [
+      "images/hayabusa.jpg",
+      "images/nozomi.jpg"
+    ];
+
     function generateQuestion() {
-      a = Math.floor(Math.random() * 10);
-      b = Math.floor(Math.random() * 10);
+      a = Math.floor(Math.random() * 9) + 1; // 1〜9
       document.getElementById("question").textContent = `${a} + ${b} =`;
       document.getElementById("result").textContent = "";
       document.getElementById("answer").value = "";
@@ -90,6 +95,7 @@
         result.textContent = "せいかい！メダルをゲット！";
         medalCount++;
         addMedal();
+        showRandomTrain(); // 正解時に画像を切り替え
       } else {
         result.textContent = `ざんねん！こたえは ${a + b} だよ`;
       }
@@ -106,14 +112,11 @@
       medals.appendChild(img);
     }
 
-    const trainImages = [
-      "images/hayabusa.jpg",
-      "images/nozomi.jpg"
-    ];
-
-    const randomIndex = Math.floor(Math.random() * trainImages.length);
-    const randomImage = trainImages[randomIndex];
-    document.getElementById("train").src = randomImage;
+    function showRandomTrain() {
+      const randomIndex = Math.floor(Math.random() * trainImages.length);
+      const randomImage = trainImages[randomIndex];
+      document.getElementById("train").src = randomImage;
+    }
 
     generateQuestion();
   </script>
